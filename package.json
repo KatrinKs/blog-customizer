@@ -6,26 +6,29 @@
 	"devDependencies": {
 		"@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
 		"@storybook/addon-essentials": "^8.0.5",
-		"@storybook/addon-interactions": "^8.0.5",
+		"@storybook/addon-interactions": "^8.6.14",
 		"@storybook/addon-links": "^8.0.5",
 		"@storybook/addon-onboarding": "^8.0.5",
 		"@storybook/addon-styling-webpack": "^1.0.0",
 		"@storybook/addon-webpack5-compiler-swc": "^1.0.2",
 		"@storybook/blocks": "^8.0.5",
+		"@storybook/react": "^8.6.14",
 		"@storybook/react-webpack5": "^8.0.5",
-		"@storybook/test": "^8.0.5",
+		"@storybook/test": "^8.6.14",
 		"@svgr/webpack": "^8.0.1",
+		"@types/mdx": "^2.0.13",
+		"@types/node": "^24.7.0",
 		"@types/react": "^18.2.0",
 		"@types/react-dom": "^18.2.1",
 		"@typescript-eslint/eslint-plugin": "^5.59.11",
 		"@typescript-eslint/parser": "^5.59.11",
 		"autoprefixer": "^10.4.14",
 		"clean-webpack-plugin": "^4.0.0",
-		"commitizen": "^4.3.0",
+		"commitizen": "^3.0.0",
 		"cross-env": "^7.0.3",
 		"css-loader": "^6.8.1",
 		"cssnano": "^6.0.1",
-		"cz-conventional-changelog": "^3.3.0",
+		"cz-conventional-changelog": "^3.0.1",
 		"eslint": "^8.42.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-import-resolver-typescript": "^3.6.1",
@@ -36,6 +39,7 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"html-webpack-plugin": "^5.5.1",
 		"husky": "^8.0.3",
+		"install": "^0.13.0",
 		"lint-staged": "^13.2.2",
 		"merge": "^2.1.1",
 		"mini-css-extract-plugin": "^2.7.6",
@@ -45,7 +49,7 @@
 		"resolve-url-loader": "^5.0.0",
 		"sass": "^1.69.7",
 		"sass-loader": "^13.3.3",
-		"storybook": "^8.0.5",
+		"storybook": "^8.6.14",
 		"style-loader": "^3.3.3",
 		"stylelint": "^16.1.0",
 		"stylelint-config-standard-scss": "^13.0.0",
@@ -56,7 +60,7 @@
 		"url-loader": "^4.1.1",
 		"webpack": "^5.81.0",
 		"webpack-cli": "^5.0.2",
-		"webpack-dev-server": "^4.15.0"
+		"webpack-dev-server": "^5.2.2"
 	},
 	"scripts": {
 		"build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.js --env env=prod",
@@ -77,9 +81,11 @@
 		]
 	},
 	"dependencies": {
-		"clsx": "^2.1.0",
+		"clsx": "^2.1.1",
+		"mdx": "^0.3.1",
 		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react-dom": "^18.2.0",
+		"run": "^1.5.0"
 	},
 	"lint-staged": {
 		"*.{css,scss}": "npm run stylelint:fix",
