@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import clsx from 'clsx';
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import { RadioGroup } from 'src/ui/radio-group';
@@ -13,6 +14,7 @@ import {
   contentWidthArr,
   fontSizeOptions
 } from 'src/constants/articleProps';
+import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
 
 import styles from './ArticleParamsForm.module.scss';
 
@@ -29,39 +31,40 @@ export const ArticleParamsForm = ({
   onApply,
   onReset
 }: ArticleParamsFormProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const sidebarRef = useRef<HTMLElement>(null);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onApply();
-	setIsOpen(false);
+	setIsMenuOpen(false);
   };
 
   const handleReset = () => {
     onReset();
-	setIsOpen(false);
+	setIsMenuOpen(false);
   };
 
-  const handleOutsideClick = () => {
-    if (isOpen) {
-      setIsOpen(false);
-    }
-  };
+  useOutsideClickClose({
+    isOpen: isMenuOpen,
+    rootRef: sidebarRef,
+    onChange: setIsMenuOpen,
+  });
 
   return (
     <>
       <ArrowButton
-        isOpen={isOpen}
-        onClick={() => setIsOpen(!isOpen)}
+        isOpen={isMenuOpen}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
       />
       <aside
-        className={`${styles.container} ${isOpen ? styles.container_open : ''}`}
-        onClick={handleOutsideClick}
+        ref={sidebarRef}
+        className={clsx(styles.container, {
+          [styles.container_open]: isMenuOpen
+        })}
       >
         <form
           className={styles.form}
           onSubmit={handleSubmit}
-          onClick={(e) => e.stopPropagation()}
         >
           <Text as="h2" size={31} weight={800} uppercase>
             Задайте параметры
@@ -81,6 +84,8 @@ export const ArticleParamsForm = ({
             onChange={(option) => onFormStateChange({ fontSizeOption: option })}
             title="размер шрифта"
           />
+
+          <Separator />
 
           <Select
             selected={formState.fontColor}
@@ -108,7 +113,7 @@ export const ArticleParamsForm = ({
           <div className={styles.bottomContainer}>
             <Button
               title='Сбросить'
-              htmlType='reset'
+              htmlType='button'
               type='clear'
               onClick={handleReset}
             />

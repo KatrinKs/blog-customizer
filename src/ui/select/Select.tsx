@@ -8,7 +8,6 @@ import { Option } from './Option';
 import { isFontFamilyClass } from './helpers/isFontFamilyClass';
 import { useEnterSubmit } from './hooks/useEnterSubmit';
 import { useOutsideClickClose } from './hooks/useOutsideClickClose';
-
 import styles from './Select.module.scss';
 
 type SelectProps = {
@@ -43,6 +42,7 @@ export const Select = (props: SelectProps) => {
 		setIsOpen(false);
 		onChange?.(option);
 	};
+
 	const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = () => {
 		setIsOpen((isOpen) => !isOpen);
 	};
@@ -50,11 +50,9 @@ export const Select = (props: SelectProps) => {
 	return (
 		<div className={styles.container}>
 			{title && (
-				<>
-					<Text size={12} weight={800} uppercase>
-						{title}
-					</Text>
-				</>
+				<Text size={12} weight={800} uppercase>
+					{title}
+				</Text>
 			)}
 			<div
 				className={styles.selectWrapper}
@@ -65,9 +63,8 @@ export const Select = (props: SelectProps) => {
 				<div
 					className={clsx(
 						styles.placeholder,
-						(styles as Record<string, string>)[optionClassName]
+						optionClassName && (styles as Record<string, string>)[optionClassName]
 					)}
-					data-status={status}
 					data-selected={!!selected?.value}
 					onClick={handlePlaceHolderClick}
 					role='button'
